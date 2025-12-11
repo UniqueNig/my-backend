@@ -59,21 +59,41 @@ const authenticateUser = (req, res) => {
     });
 };
 
+// const getDashboard = (req, res) => {
+//   let token = req.headers.authorization.split(" ")[1];
+//   console.log(token);
+//   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+//     if (err) {
+//       console.log("Token verification failed:", err);
+//     } else {
+//       console.log("Decoded token:", decoded);
+//       let email = decoded.email;
+//       userModel.findOne({ email: email }).then((user) => {
+//         res.send({ status: true, message: "Token is valid", user });
+//         console.log(user);
+//       });
+//     }
+//   });
+// };
+
 const getDashboard = (req, res) => {
   let token = req.headers.authorization.split(" ")[1];
-  console.log(token);
+
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       console.log("Token verification failed:", err);
-    } else {
-      console.log("Decoded token:", decoded);
-      let email = decoded.email;
-      userModel.findOne({ email: email }).then((user) => {
-        res.send({ status: true, message: "Token is valid", user });
-        console.log(user);
+      return res.send({
+        status: false,
+        message: "Token expired or invalid",
       });
     }
+
+    let email = decoded.email;
+    userModel.findOne({ email }).then((user) => {
+      res.send({ status: true, message: "Token is valid", user });
+    });
   });
 };
+
 
 module.exports = { addUser, authenticateUser, getDashboard };
