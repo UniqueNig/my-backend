@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ALL users</h1>
+    <% student.forEach((student, index) => { %>
+     <i><%= index +1 %></i>
+    <p><%= student.student_firstName %></p>
+    <p><%= student.student_lastName %></p>
+    <p><%= student.student_email %></p>
+    <% }) %>
+</body>
+</html>
