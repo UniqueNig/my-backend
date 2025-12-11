@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test.js",
     "dev": "nodemon index.js",
-    "build": "echo 'Error: no build step defined' "
+    "build": "echo 'No build step defined' "
   },
   "keywords": [
     "backend",
